@@ -8,7 +8,6 @@ package za.ac.wits.meng.dbbigdata.mapreduce;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -18,29 +17,12 @@ import java.io.IOException;
  * @author F4728548
  */
 public class SplittingAlgorithm {
-
-    public static String FILE_DIR = "C:\\Drivers\\";
-
-    public static File createFile(String outputFileName) {
-        String filePath = FILE_DIR + outputFileName + ".txt";
-        File file = new File(filePath);
-
-        try (FileOutputStream fop = new FileOutputStream(file)) {
-            // if file doesn't exists, then create it
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-            // get the content in bytes
-            System.out.println("Done");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return file;
-    }
-
-    public void splitFile(String inputFile, int size) {
-        try (BufferedReader br = new BufferedReader(new FileReader(inputFile))) {
+    private String inputFolder = Util.ROOT_DIR;
+    private String outputFolder = Util.ROOT_DIR + Util.SPLIT_OUT_MAP_IN;
+    
+    public void splitFile(String inputFile, int splitSize) {
+        String inputFilePath = inputFolder + inputFile;
+        try (BufferedReader br = new BufferedReader(new FileReader(inputFilePath))) {
             String sCurrentLine;
             int prevRowCount = -1;
             File file;
@@ -55,7 +37,8 @@ public class SplittingAlgorithm {
                     if (bw != null) {
                         bw.close();
                     }
-                    file = createFile(String.valueOf(rowNum));
+                    String outputFileName = outputFolder + String.valueOf(rowNum) + ".txt";
+                    file = Util.createFile(outputFileName);
                     prevRowCount = rowNum;
                     fw = new FileWriter(file.getAbsoluteFile());
                     bw = new BufferedWriter(fw);
@@ -71,8 +54,8 @@ public class SplittingAlgorithm {
     public static void main(String[] args) {
         SplittingAlgorithm splitter = new SplittingAlgorithm();
         String inputFileA = "File_100_A.txt";
-        String inputFilePathA = FILE_DIR + inputFileA;
-        splitter.splitFile(inputFilePathA, 0);
+        String inputFilePathA = Util.ROOT_DIR + inputFileA;
+        splitter.splitFile(inputFilePathA, 1);
         
         
     }

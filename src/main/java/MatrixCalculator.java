@@ -161,7 +161,7 @@ public class MatrixCalculator {
         }
         long calcEndTime = System.currentTimeMillis();
         System.out.println("C - " + C.length + "*" + C[0].length + ": Matrix Computation Time = " + (calcEndTime - calcStartTime) + "ms");
-        printProductMatrix(C);
+        printProductMatrix(B);
 
     }
 
@@ -174,11 +174,11 @@ public class MatrixCalculator {
          }
          } */
         for (int[] C1 : C) {
-            System.out.print("[");
+            System.out.print("");
             for (int p : C1) {
-                System.out.print(p + " ");
+                System.out.print(p + ",");
             }
-            System.out.print("]\n");
+            System.out.print("\n");
 
         }
 
