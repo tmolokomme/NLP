@@ -20,7 +20,8 @@ public class SplittingAlgorithm {
     private String inputFolder = Util.ROOT_DIR;
     private String outputFolder = Util.ROOT_DIR + Util.SPLIT_OUT_MAP_IN;
     
-    public void splitFile(String inputFile, int splitSize) {
+    public int splitFile(String inputFile) { //, int splitSize
+        int noOfFiles = 0;
         String inputFilePath = inputFolder + inputFile;
         try (BufferedReader br = new BufferedReader(new FileReader(inputFilePath))) {
             String sCurrentLine;
@@ -39,6 +40,7 @@ public class SplittingAlgorithm {
                     }
                     String outputFileName = outputFolder + String.valueOf(rowNum) + ".txt";
                     file = Util.createFile(outputFileName);
+                    noOfFiles += 1;
                     prevRowCount = rowNum;
                     fw = new FileWriter(file.getAbsoluteFile());
                     bw = new BufferedWriter(fw);
@@ -49,15 +51,16 @@ public class SplittingAlgorithm {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return noOfFiles;
     }
     
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         SplittingAlgorithm splitter = new SplittingAlgorithm();
         String inputFileA = "File_100_A.txt";
         String inputFilePathA = Util.ROOT_DIR + inputFileA;
-        splitter.splitFile(inputFilePathA, 1);
+        splitter.splitFile(inputFilePathA);
         
         
-    }
+    } */
 
 }

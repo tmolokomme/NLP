@@ -11,17 +11,46 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author F4728548
  */
-public class ShufflingAlgorithm {
+public class ShufflingAlgorithm implements Runnable {
     private String inputFolder = Util.ROOT_DIR + Util.MAP_OUT_SHUFFLE_IN;
     private String outputFolder = Util.ROOT_DIR + Util.SHUFFLE_OUT_REDUCE_IN;
+
+    private String inputFile;
+    private int fileNumA;
     
-    public void shuffle(String inputFile, int fileNumA) {
+    public ShufflingAlgorithm(String inputFile, int fileNumA) {
+        this.inputFile = inputFile;
+        this.fileNumA = fileNumA;
+    }
+        
+    @Override
+    public void run() { 
+        shuffle(inputFile, fileNumA);
+    }
+     
+    private void shuffle(String inputFile, int fileNumA) {
         String inputPath = inputFolder + inputFile;
+        boolean isFileCreatedAlready = false;
+        while(!isFileCreatedAlready) {
+            File f = new File(inputPath);
+            if(f.exists()) { 
+                isFileCreatedAlready = true;
+            } else {
+                System.out.println("Thread: " + fileNumA + " waiting for a file: " + inputFile);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(ShufflingAlgorithm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } 
+        }
         
         try (BufferedReader br = new BufferedReader(new FileReader(inputPath))) {
 
@@ -75,12 +104,13 @@ public class ShufflingAlgorithm {
 
     }
 
-    public static void main(String[] args) {
-        ShufflingAlgorithm shuffleAlg = new ShufflingAlgorithm();
+    /*public static void main(String[] args) {
+//        ShufflingAlgorithm shuffleAlg = new ShufflingAlgorithm();
         //shuffleAlg.initializeMatrix(fileB, 100);
         //int fileNum  = 0;
         String outputFilename = "SV0";
-        String inputFile = "V_0.txt"; //SplittingAlgorithm.FILE_DIR + 
-        shuffleAlg.shuffle(inputFile, 0);
-    }
+        String inputFile = "0.txt"; //SplittingAlgorithm.FILE_DIR + 
+        new ShufflingAlgorithm(inputFile, 0).run();
+//        shuffleAlg.shuffle(inputFile, 0);
+    }*/
 }

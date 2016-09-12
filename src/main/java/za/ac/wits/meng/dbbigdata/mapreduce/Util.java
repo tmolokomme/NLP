@@ -19,13 +19,13 @@ public class Util {
     public static String MAP_OUT_SHUFFLE_IN = "MAP_SUFFLE\\";
 
     public static String SHUFFLE_OUT_REDUCE_IN = "SHUFFLE_REDUCE\\";
-    public static String REDUCE_OUT_RESULT_IN = "REDUCE_RESULT\\";
+    //public static String REDUCE_OUT_RESULT_IN = "REDUCE_RESULT\\";
 
     public static String SHUFFLE_IN_FOLDER = "";
 
     public static String ROOT_DIR = "D:\\MAPREDUCE\\";
 
-    public static String B_MATRIX_FOLDERA = "MatrixB\\";
+    //public static String B_MATRIX_FOLDERA = "MatrixB\\";
     
      public static File createFile(String outputFilePath) {
         //String filePath = ROOT_DIR + outputFileName + ".txt";
@@ -37,7 +37,7 @@ public class Util {
                 file.createNewFile();
             }
             // get the content in bytes
-            System.out.println("Done");
+            //System.out.println("Done");
 
         } catch (IOException e) {
             e.printStackTrace();

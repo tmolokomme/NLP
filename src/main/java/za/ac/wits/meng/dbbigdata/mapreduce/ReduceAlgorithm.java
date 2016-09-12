@@ -19,7 +19,7 @@ import java.io.IOException;
 public class ReduceAlgorithm {
     
     private String inputFolder = Util.ROOT_DIR + Util.SHUFFLE_OUT_REDUCE_IN;
-    private String outputFolder = Util.ROOT_DIR + Util.REDUCE_OUT_RESULT_IN;
+    private String outputFolder = Util.ROOT_DIR ; //+ Util.REDUCE_OUT_RESULT_IN;
     
 
     public void reduce(String outputFileName, int size) {
@@ -58,16 +58,17 @@ public class ReduceAlgorithm {
 //                bw.close();
 //            }
         }
+        System.out.println("reduce step completed successfully - final results in: " + outputFolder + String.valueOf(outputFileName));
 
     }
     
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         ReduceAlgorithm reduceAlg = new ReduceAlgorithm();
         //shuffleAlg.initializeMatrix(fileB, 100);
         //int fileNum  = 0;
         String outputFilename = "FinalResult";
         //String inputFile = SplittingAlgorithm.FILE_DIR + "V_1.txt";
         reduceAlg.reduce(outputFilename, 2);
-    }
+    }*/
 
 }
