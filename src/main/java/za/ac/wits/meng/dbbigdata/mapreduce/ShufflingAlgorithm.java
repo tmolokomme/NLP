@@ -43,7 +43,7 @@ public class ShufflingAlgorithm implements Runnable {
             if(f.exists()) { 
                 isFileCreatedAlready = true;
             } else {
-                System.out.println("Thread: " + fileNumA + " waiting for a file: " + inputFile);
+                System.out.println("ShuffleThread: " + fileNumA + " waiting for a file: " + inputFile);
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException ex) {

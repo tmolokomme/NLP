@@ -81,7 +81,7 @@ public class MappingAlgorithm extends Thread {
                 if (f.exists()) {
                     isFileCreatedAlready = true;
                 } else {
-                    System.out.println("Thread: " + outputFileNo + " waiting for a file: " + inputMapFile);
+                    System.out.println("MappingThread: " + outputFileNo + " waiting for a file: " + inputMapFile);
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException ex) {
