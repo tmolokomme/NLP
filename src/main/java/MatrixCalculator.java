@@ -74,6 +74,7 @@ public class MatrixCalculator {
             } else {
                 B = new int[matrixSize][matrixSize];
             }
+            
             String sCurrentLine;
             //br = new BufferedReader(new FileReader(pathA)); //"C:\\testing.txt"));
             String[] line;
